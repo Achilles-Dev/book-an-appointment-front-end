@@ -71,13 +71,13 @@ const motorcyclesReducer = (state = initialState, action) => {
     case CREATE_MOTORCYCLE:
       return {
         ...state,
-        motorcycles: [...state, action.payload],
+        motorcycles: [...state.motorcycles, action.payload],
         status: 'succeeded',
       };
     case DELETE_MOTORCYCLE:
       return {
         ...state,
-        motorcycles: state.filter((motorcycle) => motorcycle.id !== action.payload),
+        motorcycles: state.motorcycles.filter((motorcycle) => motorcycle.id !== action.payload),
         status: 'succeeded',
       };
     case FETCH_SINGLE_MOTORCYCLE:
@@ -89,7 +89,7 @@ const motorcyclesReducer = (state = initialState, action) => {
     case UPDATE_MOTOR:
       return {
         ...state,
-        motorcycles: state.map((motor) => (motor.id === action.id
+        motorcycles: state.motorcycles.map((motor) => (motor.id === action.id
           ? {
             ...motor,
             ...action.payload,

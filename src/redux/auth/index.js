@@ -1,5 +1,6 @@
 import API from '../api';
 
+// To be removed
 export const loadCurrentUser = (state) => state.auth.currentUser;
 
 const LOAD_CURRENT_USER = 'auth/current_user';
@@ -40,6 +41,7 @@ const reducer = (state = initialState, action) => {
       return {
         currentUser: action.payload.user,
         token: action.payload.token,
+        status: 'succeeded',
       };
     case RESET:
       return initialState;
