@@ -22,10 +22,8 @@ const Motor = (motor) => {
             <Card.Img variant="top" style={{ width: '350px', height: '200px' }} src={image && image.url} className="motor-image" />
           </div>
           <Card.Body>
-            <Card.Title><p className="text-dark text-center">{model.toUpperCase()}</p></Card.Title>
-            <Card.Text>
-              <p className="text-dark text-center">{description}</p>
-            </Card.Text>
+            <Card.Title className="text-dark text-center">{model.toUpperCase()}</Card.Title>
+            <Card.Text className="text-dark text-center">{description}</Card.Text>
           </Card.Body>
         </Link>
         <Card.Body className="text-center">

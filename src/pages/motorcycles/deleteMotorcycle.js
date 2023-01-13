@@ -33,22 +33,20 @@ const DeleteMotorcycle = () => {
               </thead>
               <tbody className="table-body">
                 { motorcycles.map((motor) => (
-                  <>
-                    <tr key={motor.id}>
-                      <td>{motor.model}</td>
-                      <td>{motor.price}</td>
-                      <td>{motor.duration_months}</td>
-                      <td>
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={() => handleDelete(motor.id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </>
+                  <tr key={motor.id}>
+                    <td>{motor.model}</td>
+                    <td>{motor.price}</td>
+                    <td>{motor.duration_months}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(motor.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>
