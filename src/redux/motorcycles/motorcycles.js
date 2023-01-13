@@ -5,6 +5,7 @@ export const CREATE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/CREATE_MOTORCYCLE
 export const DELETE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/DELETE_MOTORCYCLE';
 export const FETCH_SINGLE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/FETCH_SINGLE_MOTORCYCLE';
 export const UPDATE_MOTOR = 'BOOK-APPOINTMENT/MOTORCYCLES/UPDATE_MOTOR';
+export const RESET = 'BOOK-APPOINTMENT/MOTORCYCLES/RESET';
 
 export const fetchMotorcycles = () => (dispatch) => {
   API.fetchMotors((response) => {
@@ -54,6 +55,12 @@ export const updateMotorcycle = (id, motorcycle) => (dispatch) => {
   });
 };
 
+export const resetMotorcycles = () => async (dispatch) => {
+  await dispatch({
+    type: RESET,
+  });
+};
+
 const initialState = {
   motorcycles: [],
   motorcycle: {},
@@ -97,6 +104,8 @@ const motorcyclesReducer = (state = initialState, action) => {
           : motor)),
         status: 'succeeded',
       };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

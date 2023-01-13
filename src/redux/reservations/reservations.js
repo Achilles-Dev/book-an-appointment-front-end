@@ -5,6 +5,7 @@ export const CREATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/CREATE_RESERVAT
 export const DELETE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/DELETE_RESERVATION';
 export const FETCH_SINGLE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/FETCH_SINGLE_RESERVATION';
 export const UPDATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/UPDATE_RESERVATION';
+export const RESET = 'BOOK-APPOINTMENT/RESERVATIONS/RESET';
 
 export const fetchReservations = (userId) => (dispatch) => {
   API.fetchReservations(userId, (response) => {
@@ -54,6 +55,12 @@ export const updateReservation = (id, reservation) => (dispatch) => {
   });
 };
 
+export const resetReservations = () => async (dispatch) => {
+  await dispatch({
+    type: RESET,
+  });
+};
+
 const initialState = {
   reservations: [],
   reservation: {},
@@ -97,6 +104,8 @@ const reservationsReducer = (state = initialState, action) => {
           : reservation)),
         staus: 'succeeded',
       };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

@@ -29,6 +29,7 @@ function App() {
         : '' }
       <Routes>
         <Route
+          exact="true"
           path="/"
           element={
           currentUser.token === null ? (
@@ -39,6 +40,7 @@ function App() {
         }
         />
         <Route
+          exact="true"
           path="/signin"
           element={
           currentUser.token === null ? (
@@ -49,6 +51,7 @@ function App() {
         }
         />
         <Route
+          exact="true"
           path="/signup"
           element={
           currentUser.token === null ? (
@@ -59,6 +62,7 @@ function App() {
         }
         />
         <Route
+          exact="true"
           path="/home"
           element={
             currentUser.token && currentUser.token !== null ? (
@@ -90,6 +94,7 @@ function App() {
         />
 
         <Route
+          exact="true"
           path="/delete-motorcycle"
           element={
           currentUser.token && currentUser.token !== null
@@ -98,7 +103,7 @@ function App() {
           }
         />
         <Route
-          exact
+          exact="true"
           path="/add-motorcycle"
           element={
           currentUser.token && currentUser.token !== null
@@ -107,6 +112,7 @@ function App() {
         }
         />
         <Route
+          exact="true"
           path="/reserve/add"
           element={
           currentUser.token && currentUser.token !== null

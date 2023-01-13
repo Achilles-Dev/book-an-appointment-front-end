@@ -12,12 +12,16 @@ import {
   faGooglePlus,
 } from '@fortawesome/free-brands-svg-icons';
 import { logout } from '../../redux/auth';
+import { resetMotorcycles } from '../../redux/motorcycles/motorcycles';
+import { resetReservations } from '../../redux/reservations/reservations';
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
     dispatch(logout());
+    dispatch(resetMotorcycles());
+    dispatch(resetReservations());
     navigate('/');
   };
   return (
