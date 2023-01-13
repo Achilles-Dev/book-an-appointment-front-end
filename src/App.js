@@ -101,10 +101,10 @@ function App() {
           exact
           path="/add-motorcycle"
           element={
-           currentUser.token && currentUser.token !== null
-             ? <AddMotorcycle />
-             : <Navigate to="/signin" />
-         }
+          currentUser.token && currentUser.token !== null
+            ? <AddMotorcycle />
+            : <Navigate to="/signin" />
+        }
         />
         <Route
           path="/reserve/add"

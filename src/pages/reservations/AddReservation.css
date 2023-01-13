@@ -32,6 +32,7 @@
   width: 147px;
   background-color: var(--white);
   border-color: var(--green);
+  padding: 0 20px;
 }
 
 .reserve-btn:hover {

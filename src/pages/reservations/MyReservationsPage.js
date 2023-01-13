@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMotorcycle, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { fetchReservations } from '../../redux/reservations/reservations';
 import Reservation from '../../components/Reservations/Reservation';
 import { fetchMotorcycles } from '../../redux/motorcycles/motorcycles';
@@ -19,32 +21,45 @@ const MyReservationsPage = ({ userId }) => {
   }, [dispatch]);
 
   return (
-    <div className="p-3 w-100">
+    <div className="main">
       { reservations.length > 0
         ? (
           <>
             <h3 className="text-center">My Reservations</h3>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Date</th>
-                  <th>City</th>
-                </tr>
-              </thead>
-              <tbody className="table-body">
-                { reservations.length > 0 && reservations.map((reservation) => (
-                  <Reservation
-                    key={reservation.id}
-                    reservation={reservation}
-                    motorcycles={motorcycles}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <div className="form">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Date</th>
+                    <th>City</th>
+                  </tr>
+                </thead>
+                <tbody className="table-body">
+                  { reservations.length > 0 && reservations.map((reservation) => (
+                    <Reservation
+                      key={reservation.id}
+                      reservation={reservation}
+                      motorcycles={motorcycles}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )
-        : <h2>No Reservations</h2>}
+        : (
+          <div className="d-flex flex-column border mx-auto info p-5">
+            <FontAwesomeIcon icon={faCircleInfo} className="text-info h3" />
+            <h2 className="w-100 text-center">
+              There are no Reservations
+              {' '}
+              <FontAwesomeIcon icon={faMotorcycle} />
+              {' '}
+              made
+            </h2>
+          </div>
+        )}
     </div>
   );
 };

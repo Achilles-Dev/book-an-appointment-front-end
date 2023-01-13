@@ -2,44 +2,67 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { fetchMotorcycles } from '../../redux/motorcycles/motorcycles';
-import Motorcycle from './Motorcycle';
+import { deleteMotorcycle, fetchMotorcycles } from '../../redux/motorcycles/motorcycles';
 
 const DeleteMotorcycle = () => {
+  const motorcycles = useSelector((state) => state.motorcycles.motorcycles);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchMotorcycles());
   }, []);
-  const motorcyclesState = useSelector((state) => state.motorcycles);
-  const motorcycles = Array.isArray(motorcyclesState) && motorcyclesState.map((motor) => (
-    <Motorcycle key={motor.id} motor={motor} />
-  ));
+
+  const handleDelete = (id) => {
+    dispatch(deleteMotorcycle(id));
+  };
 
   return (
-    <div className="form">
+    <div className="main">
       {motorcycles.length > 0 ? (
         <>
-          <h3>Delete Motorcycle</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Model</th>
-                <th scope="col">Price</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>{motorcycles}</tbody>
-          </table>
+          <h3 className="text-center">Delete Motorcycle</h3>
+          <div className="form">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody className="table-body">
+                { motorcycles.map((motor) => (
+                  <>
+                    <tr key={motor.id}>
+                      <td>{motor.model}</td>
+                      <td>{motor.price}</td>
+                      <td>{motor.duration_months}</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() => handleDelete(motor.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       ) : (
-        <div className="dflex flex-column justify-content-center border mx-auto info">
+        <div className="d-flex flex-column border mx-auto info p-5">
           <FontAwesomeIcon icon={faCircleInfo} className="text-info h3" />
           <h2 className="w-100 text-center">
-            There is no motorcycle
+            There are no motorcycles
+            {' '}
             <FontAwesomeIcon icon={faMotorcycle} />
             {' '}
-            avilable
+            available
           </h2>
         </div>
       )}
