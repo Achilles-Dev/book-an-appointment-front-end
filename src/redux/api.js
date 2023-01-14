@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://motorcycle-bookings-app.onrender.com/api';
+const baseURL = 'https://motorcycle-booking-app.fly.dev/api';
 
 const API = {
   login: (user, success) => {
