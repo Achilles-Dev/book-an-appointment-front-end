@@ -11,9 +11,7 @@ const API = {
       .then((response) => {
         success(response);
       })
-      .catch((error) => {
-        success(error.message);
-      });
+      z
   },
   register: (user, success) => {
     axios
