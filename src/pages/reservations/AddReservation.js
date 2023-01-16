@@ -21,7 +21,7 @@ const AddReservation = ({ userId }) => {
   useEffect(() => {
     dispatch(fetchMotorcycles());
   }, []);
-  const motors = useSelector((state) => state.motorcycles);
+  const motors = useSelector((state) => state.motorcycles.motorcycles);
   const [isOpen, setIsOpen] = useState(true);
   const [reservation, setReservation] = useState(getData);
   const [motorId, setMotorId] = useState();
@@ -75,10 +75,11 @@ const AddReservation = ({ userId }) => {
               engineering excellence and
               dedication to the rider.
             </p>
-            <form className="d-flex justify-content-center w-50 mx-auto" onSubmit={(e) => handleSubmit(e)}>
+            <form className="d-flex justify-content-center w-50 mx-auto gap-2" onSubmit={(e) => handleSubmit(e)}>
               {location.state === null
                 ? (
-                  <select onChange={handleMotor}>
+                  <select className="form-select" onChange={handleMotor}>
+                    <option>-Select motor-</option>
                     {motors.length > 0 && motors.map((motor) => (
                       <option key={motor.id} value={motor.id}>
                         {motor.model}
@@ -88,8 +89,8 @@ const AddReservation = ({ userId }) => {
                 )
                 : ''}
 
-              <input type="text" name="city" className="form-control w-25" placeholder="City " onChange={handleChange} required />
-              <input type="date" name="date" onChange={handleChange} />
+              <input type="text" name="city" className="form-control" placeholder="City " onChange={handleChange} required />
+              <input type="date" name="date" className="form-control" onChange={handleChange} />
               <button className="reserve-btn rounded-pill" type="submit">Reserve</button>
             </form>
           </div>

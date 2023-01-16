@@ -38,8 +38,8 @@ const AddMotorcycle = () => {
   };
 
   return (
-    <div className="form">
-      <h2>Add your Motor</h2>
+    <div className="main">
+      <h2 className="text-center">Add your Motor</h2>
 
       <form onSubmit={(e) => submitHandle(e)} className="form">
         <label className="form-label" htmlFor="model">
@@ -104,9 +104,11 @@ const AddMotorcycle = () => {
             onChange={imageHandle}
           />
         </label>
-        <button type="submit" className="btn btn-primary mt-3" id="submit">
-          Add to the Database
-        </button>
+        <div className="d-flex">
+          <button type="submit" className="btn btn-primary mt-3" id="submit">
+            Add to the Database
+          </button>
+        </div>
       </form>
     </div>
   );

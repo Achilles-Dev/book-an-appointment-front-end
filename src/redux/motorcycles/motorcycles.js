@@ -1,10 +1,11 @@
 import API from '../api';
 
-export const FETCH_MOTORCYCLES = 'BOOK-APPOINTMENT/MOTORCYCLES/FETCH_MOTORCYCLES';
-export const CREATE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/CREATE_MOTORCYCLE';
-export const DELETE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/DELETE_MOTORCYCLE';
-export const FETCH_SINGLE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/FETCH_SINGLE_MOTORCYCLE';
-export const UPDATE_MOTOR = 'BOOK-APPOINTMENT/MOTORCYCLES/UPDATE_MOTOR';
+const FETCH_MOTORCYCLES = 'BOOK-APPOINTMENT/MOTORCYCLES/FETCH_MOTORCYCLES';
+const CREATE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/CREATE_MOTORCYCLE';
+const DELETE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/DELETE_MOTORCYCLE';
+const FETCH_SINGLE_MOTORCYCLE = 'BOOK-APPOINTMENT/MOTORCYCLES/FETCH_SINGLE_MOTORCYCLE';
+const UPDATE_MOTOR = 'BOOK-APPOINTMENT/MOTORCYCLES/UPDATE_MOTOR';
+const RESET = 'BOOK-APPOINTMENT/MOTORCYCLES/RESET';
 
 export const fetchMotorcycles = () => (dispatch) => {
   API.fetchMotors((response) => {
@@ -54,25 +55,57 @@ export const updateMotorcycle = (id, motorcycle) => (dispatch) => {
   });
 };
 
-const initialState = [];
+export const resetMotorcycles = () => async (dispatch) => {
+  await dispatch({
+    type: RESET,
+  });
+};
+
+const initialState = {
+  motorcycles: [],
+  motorcycle: {},
+  status: 'idle',
+};
 
 const motorcyclesReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MOTORCYCLES:
-      return action.payload;
+      return {
+        ...state,
+        motorcycles: action.payload,
+        status: 'succeeded',
+      };
     case CREATE_MOTORCYCLE:
-      return [...state, action.payload];
+      return {
+        ...state,
+        motorcycles: [...state.motorcycles, action.payload],
+        status: 'succeeded',
+      };
     case DELETE_MOTORCYCLE:
-      return state.filter((motorcycle) => motorcycle.id !== action.payload);
+      return {
+        ...state,
+        motorcycles: state.motorcycles.filter((motorcycle) => motorcycle.id !== action.payload),
+        status: 'succeeded',
+      };
     case FETCH_SINGLE_MOTORCYCLE:
-      return action.payload;
+      return {
+        ...state,
+        motorcycle: action.payload,
+        status: 'succeeded',
+      };
     case UPDATE_MOTOR:
-      return state.map((motor) => (motor.id === action.id
-        ? {
-          ...motor,
-          ...action.payload,
-        }
-        : motor));
+      return {
+        ...state,
+        motorcycles: state.motorcycles.map((motor) => (motor.id === action.id
+          ? {
+            ...motor,
+            ...action.payload,
+          }
+          : motor)),
+        status: 'succeeded',
+      };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

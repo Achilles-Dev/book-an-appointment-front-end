@@ -20,7 +20,7 @@ const SideView = (props) => {
       <h2 className="d-flex justify-content-end pt-5 mt-5 mb-0">{motorcycle.model}</h2>
       <p className="d-flex justify-content-end mb-4">
         $
-        {deposit}
+        {deposit.toFixed(2)}
         {' '}
         deposit to be made
       </p>
@@ -30,21 +30,21 @@ const SideView = (props) => {
             <td>Finance fee</td>
             <td>
               $
-              {financeFee}
+              {financeFee.toFixed(2)}
             </td>
           </tr>
           <tr>
             <td>Service fee</td>
             <td>
               $
-              {serviceFee}
+              {serviceFee.toFixed(2)}
             </td>
           </tr>
           <tr>
             <td>Total amount payable</td>
             <td>
               $
-              {totalPayable}
+              {totalPayable.toFixed(2)}
             </td>
           </tr>
           <tr>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../../redux/auth/index';
@@ -6,20 +6,34 @@ import { signup } from '../../redux/auth/index';
 const SignUpPage = () => {
   const token = useSelector((state) => state.auth.token);
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+
   const [username, setUsername] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading === false && token === null) {
+      setTimeout(() => {
+        setMessage('User already exists, sign_in to continue');
+      }, 2000);
+    }
+    setTimeout(() => {
+      setMessage('');
+    }, 5000);
+  }, [loading]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       name: username,
     };
-
     dispatch(signup(user));
-    if (token === null) {
-      setMessage('User already exists, Login to continue');
-    } else {
+    if (loading === true) {
+      setMessage('Loading... Please wait');
+      setLoading(false);
+    } else if (loading === false && token !== null) {
       navigate('/home');
     }
   };

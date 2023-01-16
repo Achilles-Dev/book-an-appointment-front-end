@@ -1,10 +1,11 @@
 import API from '../api';
 
-export const FETCH_RESERVATIONS = 'BOOK-APPOINTMENT/RESERVATIONS/FETCH_RESERVATIONS';
-export const CREATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/CREATE_RESERVATION';
-export const DELETE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/DELETE_RESERVATION';
-export const FETCH_SINGLE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/FETCH_SINGLE_RESERVATION';
-export const UPDATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/UPDATE_RESERVATION';
+const FETCH_RESERVATIONS = 'BOOK-APPOINTMENT/RESERVATIONS/FETCH_RESERVATIONS';
+const CREATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/CREATE_RESERVATION';
+const DELETE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/DELETE_RESERVATION';
+const FETCH_SINGLE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/FETCH_SINGLE_RESERVATION';
+const UPDATE_RESERVATION = 'BOOK-APPOINTMENT/RESERVATIONS/UPDATE_RESERVATION';
+const RESET = 'BOOK-APPOINTMENT/RESERVATIONS/RESET';
 
 export const fetchReservations = (userId) => (dispatch) => {
   API.fetchReservations(userId, (response) => {
@@ -54,25 +55,57 @@ export const updateReservation = (id, reservation) => (dispatch) => {
   });
 };
 
-const initialState = [];
+export const resetReservations = () => async (dispatch) => {
+  await dispatch({
+    type: RESET,
+  });
+};
+
+const initialState = {
+  reservations: [],
+  reservation: {},
+  status: 'idle',
+};
 
 const reservationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RESERVATIONS:
-      return action.payload;
+      return {
+        ...state,
+        reservations: action.payload,
+        status: 'succeeded',
+      };
     case CREATE_RESERVATION:
-      return [...state, action.payload];
+      return {
+        ...state,
+        reservations: [...state.reservations, action.payload],
+        status: 'succeeded',
+      };
     case DELETE_RESERVATION:
-      return state.filter((reservation) => reservation.id !== action.payload);
+      return {
+        ...state,
+        reservations: state.reservations.filter((reservation) => reservation.id !== action.payload),
+        status: 'succeeded',
+      };
     case FETCH_SINGLE_RESERVATION:
-      return action.payload;
+      return {
+        ...state,
+        reservation: action.payload,
+        status: 'succeeded',
+      };
     case UPDATE_RESERVATION:
-      return state.map((reservation) => (reservation.id === action.id
-        ? {
-          ...reservation,
-          ...action.payload,
-        }
-        : reservation));
+      return {
+        ...state,
+        reservations: state.reservations.map((reservation) => (reservation.id === action.id
+          ? {
+            ...reservation,
+            ...action.payload,
+          }
+          : reservation)),
+        staus: 'succeeded',
+      };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

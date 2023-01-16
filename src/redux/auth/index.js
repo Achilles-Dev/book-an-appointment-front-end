@@ -1,5 +1,6 @@
 import API from '../api';
 
+// To be removed
 export const loadCurrentUser = (state) => state.auth.currentUser;
 
 const LOAD_CURRENT_USER = 'auth/current_user';
@@ -31,6 +32,7 @@ export const signup = (payload) => async (dispatch) => {
 const initialState = {
   currentUser: {},
   token: null,
+  status: 'idle',
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +41,7 @@ const reducer = (state = initialState, action) => {
       return {
         currentUser: action.payload.user,
         token: action.payload.token,
+        status: 'succeeded',
       };
     case RESET:
       return initialState;
