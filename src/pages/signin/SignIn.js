@@ -20,10 +20,10 @@ const SignInPage = () => {
       setTimeout(() => {
         setMessage('User is not registered, Register user to continue');
       }, 2000);
-      setTimeout(() => {
-        setMessage('');
-      }, 5000);
     }
+    setTimeout(() => {
+      setMessage('');
+    }, 5000);
   }, [loading]);
 
   const handleSubmit = (e) => {

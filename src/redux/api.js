@@ -10,8 +10,7 @@ const API = {
       })
       .then((response) => {
         success(response);
-      })
-      z
+      });
   },
   register: (user, success) => {
     axios
