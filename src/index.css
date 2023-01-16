@@ -53,7 +53,6 @@ code {
 }
 
 .show-motor {
-  margin-left: 5%;
   margin-top: 200px;
 }
 
@@ -71,4 +70,14 @@ a {
 
 .info {
   z-index: 3;
+}
+
+.react-multi-carousel-track {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.react-multi-carousel-item {
+  min-width: 300px;
 }

@@ -16,10 +16,10 @@ const Motor = (motor) => {
   } = motor;
   return (
     <div className="motor-card">
-      <Card style={{ width: '18rem', border: 'none' }}>
+      <Card style={{ width: '300px', border: 'none' }}>
         <Link to={`/motorcycles/${id}`}>
           <div className="motor-image-wrap">
-            <Card.Img variant="top" style={{ width: '350px', height: '200px' }} src={image && image.url} className="motor-image" />
+            <Card.Img variant="top" style={{ width: '100%', height: '200px' }} src={image && image.url} className="motor-image" />
           </div>
           <Card.Body>
             <Card.Title className="text-dark text-center">{model.toUpperCase()}</Card.Title>
